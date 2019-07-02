@@ -1,4 +1,4 @@
-FROM circleci/node:8.11.2
+FROM circleci/node:10.16.0
 
 # install git-crypt
 RUN sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6 \
