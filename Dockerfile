@@ -25,6 +25,5 @@ RUN sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F37303
   && sudo apt-get clean -y \
   && sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-
 ENV PATH="/usr/local/lib/balena-cli:${PATH}"
 
