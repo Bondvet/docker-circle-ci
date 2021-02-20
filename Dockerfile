@@ -10,4 +10,21 @@ RUN sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F37303
   && curl https://www.agwa.name/projects/git-crypt/downloads/git-crypt-0.6.0.tar.gz > git-crypt-0.6.0.tar.gz \
   && tar -xvzf git-crypt-0.6.0.tar.gz \
   && cd git-crypt-0.6.0 \
-  && make && sudo make install PREFIX=/usr/local
+  && make && sudo make install PREFIX=/usr/local \
+
+  # install balena cli
+  && cd /tmp \
+  && wget https://github.com/balena-io/balena-cli/releases/download/v12.40.0/balena-cli-v12.40.0-linux-x64-standalone.zip -O balena-cli.zip \
+  && unzip balena-cli.zip \
+  && sudo mkdir -p /usr/local/lib \
+  && sudo mv balena-cli /usr/local/lib/ \
+
+  # cleanup
+  && sudo apt-get autoremove -y \
+  && sudo apt-get autoclean -y \
+  && sudo apt-get clean -y \
+  && sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+
+ENV PATH="/usr/local/lib/balena-cli:${PATH}"
+
