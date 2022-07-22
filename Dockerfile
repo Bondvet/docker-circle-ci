@@ -14,7 +14,7 @@ RUN sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F37303
 
   # install balena cli
   && cd /tmp \
-  && wget https://github.com/balena-io/balena-cli/releases/download/v12.40.0/balena-cli-v12.40.0-linux-x64-standalone.zip -O balena-cli.zip \
+  && wget https://github.com/balena-io/balena-cli/releases/download/v13.7.0/balena-cli-v13.7.0-linux-x64-standalone.zip -O balena-cli.zip \
   && unzip balena-cli.zip \
   && sudo mkdir -p /usr/local/lib \
   && sudo mv balena-cli /usr/local/lib/ \
