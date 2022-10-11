@@ -1,0 +1,28 @@
+ARG NODE_VERSION=16.13.1
+
+FROM bondvet/circle-ci:${NODE_VERSION}-balena
+
+ARG agent_version=1.0.40761-ab081a3
+ARG TARGETPLATFORM=linux/amd64
+
+RUN sudo apt-get update -y -qq \
+  && sudo apt-get install -y \
+    gzip apt-transport-https unzip jq \
+
+  # cleanup
+  && sudo apt-get autoremove -y \
+  && sudo apt-get autoclean -y \
+  && sudo apt-get clean -y \
+  && sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+
+COPY runner/init-launch-agent.sh /opt/circleci/init-launch-agent.sh
+RUN sudo chown -R circleci:circleci /opt/circleci && \
+    /bin/bash /opt/circleci/init-launch-agent.sh $agent_version $TARGETPLATFORM
+
+RUN sudo mkdir -p /var/opt/circleci/workdir \
+    && sudo chown -R circleci:circleci /var/opt/circleci
+
+COPY runner/start.sh /opt/circleci/start.sh
+
+ENTRYPOINT ["/opt/circleci/start.sh"]
