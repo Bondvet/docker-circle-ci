@@ -1,0 +1,94 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2.1
+
+defaults: &defaults
+  working_directory: ~/repo
+
+  docker:
+    - image: bondvet/circle-ci
+      auth:
+        username: $DOCKER_USERNAME
+        password: $DOCKER_TOKEN
+
+commands:
+  build:
+    parameters:
+      dockerfile:
+        type: string
+      tag:
+        type: string
+    steps:
+      - run:
+          name: build bondvet/circle-ci:<< parameters.tag >> using << parameters.dockerfile >>
+          command: |
+            docker build -t bondvet/circle-ci:<< parameters.tag >> -f << parameters.dockerfile >> .
+
+  push:
+    parameters:
+      tag:
+        type: string
+    steps:
+      - run:
+          name: push bondvet/circle-ci:<< parameters.tag >>
+          command: |
+            docker push -t bondvet/circle-ci:<< parameters.tag >>
+
+jobs:
+  deploy:
+    <<: *defaults
+    parameters:
+      dockerfile:
+        type: string
+      tag:
+        type: string
+    steps:
+      - checkout
+
+      - setup_remote_docker:
+          version: 20.10.2
+          docker_layer_caching: true
+
+      - build:
+          dockerfile: << parameters.dockerfile >>
+          tag: << parameters.tag >>
+
+      - push:
+          tag: << parameters.tag >>
+
+parameters:
+  node-version:
+    default: 16.13.1
+    type: string
+
+workflows:
+  version: 2.1
+  build-and-push:
+    jobs:
+      - deploy:
+          name: deploy-base
+          context: NPM
+          dockerfile: Dockerfile
+          tag: << pipeline.parameters.node-version >>
+
+      - deploy:
+          context: NPM
+          requires:
+            - deploy-base
+          matrix:
+            parameters:
+              tag:
+                - << pipeline.parameters.node-version >>-gcloud
+                - << pipeline.parameters.node-version >>-balena
+              dockerfile:
+                - Dockerfile.balena
+                - Dockerfile.
+            exclude:
+              - tag: << pipeline.parameters.node-version >>-gcloud
+                dockerfile: Dockerfile.balena
+              - tag: << pipeline.parameters.node-version >>-balena
+                dockerfile: Dockerfile.gcloud
+
+
