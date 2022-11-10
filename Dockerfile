@@ -8,19 +8,16 @@ RUN sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F37303
   && sudo apt-get install -y \
     google-cloud-sdk hub build-essential \
     libavahi-compat-libdnssd-dev \
-
   # install AWS CLI \
   && cd /tmp \
   && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
   && unzip awscliv2.zip \
   && sudo ./aws/install \
-
   # install git-crypt
   && curl https://www.agwa.name/projects/git-crypt/downloads/git-crypt-0.6.0.tar.gz > git-crypt-0.6.0.tar.gz \
   && tar -xvzf git-crypt-0.6.0.tar.gz \
   && cd git-crypt-0.6.0 \
   && make && sudo make install PREFIX=/usr/local \
-
   # cleanup
   && sudo apt-get autoremove -y \
   && sudo apt-get autoclean -y \

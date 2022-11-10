@@ -12,6 +12,7 @@ defaults: &defaults
       auth:
         username: $DOCKER_USERNAME
         password: $DOCKER_TOKEN
+  resource_class: small
 
 commands:
   build:

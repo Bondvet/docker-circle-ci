@@ -5,7 +5,6 @@ RUN cd /tmp \
   && unzip balena-cli.zip \
   && sudo mkdir -p /usr/local/lib \
   && sudo mv balena-cli /usr/local/lib/ \
-
   # cleanup
   && sudo rm -rf /tmp/*
 
