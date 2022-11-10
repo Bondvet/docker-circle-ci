@@ -9,9 +9,6 @@ defaults: &defaults
 
   docker:
     - image: bondvet/circle-ci
-      auth:
-        username: $DOCKER_USERNAME
-        password: $DOCKER_TOKEN
   resource_class: small
 
 commands:
@@ -35,6 +32,7 @@ commands:
       - run:
           name: push bondvet/circle-ci:<< parameters.tag >>
           command: |
+            docker login -u $DOCKER_USERNAME -p $DOCKER_TOKEN
             docker push bondvet/circle-ci:<< parameters.tag >>
 
 jobs:
