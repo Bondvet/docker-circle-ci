@@ -35,7 +35,7 @@ commands:
       - run:
           name: push bondvet/circle-ci:<< parameters.tag >>
           command: |
-            docker push -t bondvet/circle-ci:<< parameters.tag >>
+            docker push bondvet/circle-ci:<< parameters.tag >>
 
 jobs:
   deploy:
