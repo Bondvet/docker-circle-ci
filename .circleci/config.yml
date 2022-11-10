@@ -85,7 +85,7 @@ workflows:
                 - << pipeline.parameters.node-version >>-balena
               dockerfile:
                 - Dockerfile.balena
-                - Dockerfile.
+                - Dockerfile.gcloud
             exclude:
               - tag: << pipeline.parameters.node-version >>-gcloud
                 dockerfile: Dockerfile.balena
