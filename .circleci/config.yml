@@ -34,6 +34,7 @@ commands:
           command: |
             docker login -u $DOCKER_USERNAME -p $DOCKER_TOKEN
             docker push bondvet/circle-ci:<< parameters.tag >>
+            docker logout
 
 jobs:
   deploy:
