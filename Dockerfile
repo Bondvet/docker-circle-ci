@@ -5,10 +5,10 @@ FROM cimg/node:18.14.2
 RUN \
     # add gcloud sdk \
     sudo apt-get install -y apt-transport-https ca-certificates gnupg \
-    && echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list \
-    && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | tee /usr/share/keyrings/cloud.google.gpg \
-    && apt-get update -y  \
-    && apt-get install -y  \
+    && echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list \
+    && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo tee /usr/share/keyrings/cloud.google.gpg \
+    && sudo apt-get update -y  \
+    && sudo apt-get install -y  \
     google-cloud-sdk -yhub build-essential \
     libavahi-compat-libdnssd-dev libssl-dev g++ \
     # install AWS CLI \
