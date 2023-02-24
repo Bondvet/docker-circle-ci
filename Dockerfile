@@ -17,12 +17,14 @@ RUN \
     && unzip awscliv2.zip \
     && sudo ./aws/install
     # install git-crypt \
-RUN curl https://github.com/AGWA/git-crypt/archive/refs/tags/0.7.0.tar.gz > git-crypt-0.7.0.tar.gz \
-    && tar -xvzf git-crypt-0.7.0.tar.gz \
-    && cd git-crypt-0.7.0 \
-    && make && sudo make install PREFIX=/usr/local \
+RUN pwd
+RUN curl -vvvv "https://codeload.github.com/AGWA/git-crypt/tar.gz/refs/tags/0.7.0" -o "git-crypt-0.7.0.tar.gz"
+RUN ls -lisah git-crypt-0.7.0.tar.gz
+RUN tar -xvzf git-crypt-0.7.0.tar.gz
+RUN cd git-crypt-0.7.0
+RUN make && sudo make install PREFIX=/usr/local
     # cleanup \
-    && sudo apt-get autoremove -y \
+RUN sudo apt-get autoremove -y \
     && sudo apt-get autoclean -y \
     && sudo apt-get clean -y \
     && sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
