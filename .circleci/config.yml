@@ -82,13 +82,23 @@ workflows:
               tag:
                 - << pipeline.parameters.node-version >>-gcloud
                 - << pipeline.parameters.node-version >>-balena
+                - << pipeline.parameters.node-version >>-cypress
               dockerfile:
                 - Dockerfile.balena
                 - Dockerfile.gcloud
+                - Dockerfile.cypress
             exclude:
               - tag: << pipeline.parameters.node-version >>-gcloud
                 dockerfile: Dockerfile.balena
+              - tag: << pipeline.parameters.node-version >>-gcloud
+                dockerfile: Dockerfile.cypress
               - tag: << pipeline.parameters.node-version >>-balena
                 dockerfile: Dockerfile.gcloud
+              - tag: << pipeline.parameters.node-version >>-balena
+                dockerfile: Dockerfile.cypress
+              - tag: << pipeline.parameters.node-version >>-cypress
+                dockerfile: Dockerfile.gcloud
+              - tag: << pipeline.parameters.node-version >>-cypress
+                dockerfile: Dockerfile.balena
 
 
