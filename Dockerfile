@@ -1,4 +1,4 @@
-FROM circleci/node:16.13.1
+FROM cimg/node:18.14.2
 
 RUN sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6 \
   # add gcloud sdk
