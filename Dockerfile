@@ -9,7 +9,7 @@ RUN \
     && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo tee /usr/share/keyrings/cloud.google.gpg \
     && sudo apt-get update -y  \
     && sudo apt-get install -y  \
-    google-cloud-sdk -yhub build-essential \
+    google-cloud-sdk -y hub build-essential \
     libavahi-compat-libdnssd-dev libssl-dev g++ \
     # install AWS CLI \
     && cd /tmp \
