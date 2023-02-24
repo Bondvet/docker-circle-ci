@@ -10,16 +10,16 @@ RUN \
     && apt-get update -y  \
     && apt-get install -y  \
     google-cloud-sdk -yhub build-essential \
-    libavahi-compat-libdnssd-dev \
+    libavahi-compat-libdnssd-dev libssl-dev g++ \
     # install AWS CLI \
     && cd /tmp \
     && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
     && unzip awscliv2.zip \
-    && sudo ./aws/install \
+    && sudo ./aws/install
     # install git-crypt \
-    && curl https://www.agwa.name/projects/git-crypt/downloads/git-crypt-0.6.0.tar.gz > git-crypt-0.6.0.tar.gz \
-    && tar -xvzf git-crypt-0.6.0.tar.gz \
-    && cd git-crypt-0.6.0 \
+RUN curl https://github.com/AGWA/git-crypt/archive/refs/tags/0.7.0.tar.gz > git-crypt-0.7.0.tar.gz \
+    && tar -xvzf git-crypt-0.7.0.tar.gz \
+    && cd git-crypt-0.7.0 \
     && make && sudo make install PREFIX=/usr/local \
     # cleanup \
     && sudo apt-get autoremove -y \
