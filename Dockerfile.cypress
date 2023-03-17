@@ -1,13 +1,8 @@
-FROM cypress/browsers:node16.13.2-chrome100-ff98
+FROM cypress/browsers:node-18.14.1-chrome-111.0.5563.64-1-ff-111.0-edge-111.0.1661.43-1
 
-RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
-  && unzip awscliv2.zip \
-  && ./aws/install \
-  # install git-crypt
-  && curl https://www.agwa.name/projects/git-crypt/downloads/git-crypt-0.6.0.tar.gz > git-crypt-0.6.0.tar.gz \
-  && tar -xvzf git-crypt-0.6.0.tar.gz \
-  && cd git-crypt-0.6.0 \
-  && make && make install PREFIX=/usr/local \
+RUN apt-get update -y \
+  && apt-get install -y git-crypt \
+
   # cleanup
   && apt-get autoremove -y \
   && apt-get autoclean -y \
