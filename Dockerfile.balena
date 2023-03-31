@@ -1,4 +1,4 @@
-FROM bondvet/circle-ci:18.14.2
+FROM bondvet/circle-ci:16.19.1
 
 RUN cd /tmp \
   && wget https://github.com/balena-io/balena-cli/releases/download/v13.7.0/balena-cli-v13.7.0-linux-x64-standalone.zip -O balena-cli.zip \
