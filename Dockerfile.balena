@@ -1,7 +1,9 @@
 FROM bondvet/circle-ci:16.19.1
 
+ARG BALENA_VERSION=15.1.2
+
 RUN cd /tmp \
-  && wget https://github.com/balena-io/balena-cli/releases/download/v13.7.0/balena-cli-v13.7.0-linux-x64-standalone.zip -O balena-cli.zip \
+  && wget "https://github.com/balena-io/balena-cli/releases/download/v${BALENA_VERSION}/balena-cli-v${BALENA_VERSION}-linux-x64-standalone.zip" -O balena-cli.zip \
   && unzip balena-cli.zip \
   && sudo mkdir -p /usr/local/lib \
   && sudo mv balena-cli /usr/local/lib/ \
