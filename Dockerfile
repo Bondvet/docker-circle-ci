@@ -16,6 +16,10 @@ RUN \
     && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
     && unzip awscliv2.zip \
     && sudo ./aws/install \
+    # fix missing libssl1.1
+    && wget https://security.debian.org/debian-security/pool/updates/main/o/openssl/libssl1.1_1.1.1n-0+deb10u6_amd64.deb \
+    && sudo dpkg -i libssl1.1*.deb \
+    && rm libssl1.1*.deb \
     # cleanup
     && sudo apt-get autoremove -y \
     && sudo apt-get autoclean -y \
