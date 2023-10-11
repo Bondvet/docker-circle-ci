@@ -60,7 +60,7 @@ jobs:
 
 parameters:
   node-version:
-    default: 16.19.1
+    default: 16.20.2
     type: string
 
 workflows:

@@ -1,4 +1,4 @@
-FROM cimg/node:16.19.1
+FROM cimg/node:16.20.2
 
 RUN \
     # add gcloud sdk \
