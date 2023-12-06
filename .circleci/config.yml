@@ -36,6 +36,19 @@ commands:
             docker push bondvet/circle-ci:<< parameters.tag >>
             docker logout
 
+  deploy-cypress:
+    steps:
+      - run:
+          name: build bondvet/cypress:<< pipeline.parameters.node-version >>
+          command: |
+            docker build -t bondvet/cypress:<< pipeline.parameters.node-version >> -f Dockerfile.cypress .
+      - run:
+          name: push bondvet/cypress:<< pipeline.parameters.node-version >>
+          command: |
+            docker login -u $DOCKER_USERNAME -p $DOCKER_TOKEN
+            docker push bondvet/cypress:<< pipeline.parameters.node-version >>
+            docker logout
+
 jobs:
   deploy:
     <<: *defaults
@@ -82,23 +95,16 @@ workflows:
               tag:
                 - << pipeline.parameters.node-version >>-gcloud
                 - << pipeline.parameters.node-version >>-balena
-                - << pipeline.parameters.node-version >>-cypress
               dockerfile:
                 - Dockerfile.balena
                 - Dockerfile.gcloud
-                - Dockerfile.cypress
             exclude:
               - tag: << pipeline.parameters.node-version >>-gcloud
                 dockerfile: Dockerfile.balena
-              - tag: << pipeline.parameters.node-version >>-gcloud
-                dockerfile: Dockerfile.cypress
               - tag: << pipeline.parameters.node-version >>-balena
                 dockerfile: Dockerfile.gcloud
-              - tag: << pipeline.parameters.node-version >>-balena
-                dockerfile: Dockerfile.cypress
-              - tag: << pipeline.parameters.node-version >>-cypress
-                dockerfile: Dockerfile.gcloud
-              - tag: << pipeline.parameters.node-version >>-cypress
-                dockerfile: Dockerfile.balena
+
+      - deploy-cypress:
+          context: NPM
 
 
