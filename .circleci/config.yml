@@ -70,6 +70,16 @@ jobs:
 
       - push:
           tag: << parameters.tag >>
+  deploy-cypress:
+    <<: *defaults
+    steps:
+      - checkout
+
+      - setup_remote_docker:
+          version: 20.10.18
+          docker_layer_caching: true
+
+      - deploy-cypress
 
 parameters:
   node-version:
