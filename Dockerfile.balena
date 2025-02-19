@@ -1,4 +1,4 @@
-FROM bondvet/circle-ci:18.18.2
+FROM bondvet/circle-ci:20.18.3
 
 ARG BALENA_VERSION=20.2.3
 
