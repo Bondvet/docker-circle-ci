@@ -5,6 +5,7 @@ RUN apt-get update -y \
   git-crypt git ssh unzip ca-certificates bzip2 curl \
   # install AWS CLI \
   && cd /tmp \
+  && wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add - \
   && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
   && unzip awscliv2.zip \
   && ./aws/install \
