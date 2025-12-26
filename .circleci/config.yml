@@ -81,7 +81,7 @@ jobs:
 
 parameters:
   node-version:
-    default: 20.18.3
+    default: 20.19.0
     type: string
 
 workflows:

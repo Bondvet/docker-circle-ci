@@ -1,6 +1,6 @@
-FROM bondvet/circle-ci:20.18.3
+FROM bondvet/circle-ci:20.19.0
 
-ARG BALENA_VERSION=20.2.3
+ARG BALENA_VERSION=20.19.0
 
 RUN cd /tmp \
   && wget "https://github.com/balena-io/balena-cli/releases/download/v${BALENA_VERSION}/balena-cli-v${BALENA_VERSION}-linux-x64-standalone.zip" -O balena-cli.zip \
