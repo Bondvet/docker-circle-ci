@@ -3,15 +3,12 @@ FROM bondvet/circle-ci:20.19.0
 ARG BALENA_VERSION=22.5.5
 
 RUN cd /tmp \
-  && wget "https://github.com/balena-io/balena-cli/releases/download/v${BALENA_VERSION}/balena-cli-v${BALENA_VERSION}-linux-x64-standalone.tar.gz" -O balena-cli.tar.gz \
-  && ls -al \
-  && mkdir balena-cli \
-  && (cd balena-cli && tar -xzf ../balena-cli.tar.gz) \
-  && ls -al \
+  && wget "https://github.com/balena-io/balena-cli/releases/download/v${BALENA_VERSION}/balena-cli-v${BALENA_VERSION}-linux-x64-standalone.tar.gz" -O balena.tar.gz \
+  && tar -xzf balena.tar.gz \
   && sudo mkdir -p /usr/local/lib \
-  && sudo mv balena-cli /usr/local/lib/ \
+  && sudo mv balena /usr/local/lib/ \
   # cleanup
   && sudo rm -rf /tmp/*
 
-ENV PATH="/usr/local/lib/balena-cli:${PATH}"
+ENV PATH="/usr/local/lib/balena/bin:${PATH}"
 
