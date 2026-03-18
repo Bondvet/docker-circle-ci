@@ -1,20 +1,18 @@
-FROM cypress/browsers:node-20.14.0-chrome-126.0.6478.114-1-ff-127.0.1-edge-126.0.2592.61-1
+FROM cypress/browsers:node-20.14.0-chrome-125.0.6422.141-1-ff-126.0.1-edge-125.0.2535.85-1
 
-RUN apt-get update -y \
-  && apt-get install -y \
-  git-crypt git ssh unzip ca-certificates bzip2 curl gnupg \
-  && curl -fsSL https://dl.google.com/linux/linux_signing_key.pub \
+RUN curl -fsSL https://dl.google.com/linux/linux_signing_key.pub \
     | gpg --dearmor -o /etc/apt/keyrings/google-chrome.gpg \
   && echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/google-chrome.gpg] \
     https://dl.google.com/linux/chrome/deb/ stable main" \
     > /etc/apt/sources.list.d/google-chrome.list \
-  && apt-get update \
+  && apt-get update -y \
+  && apt-get install -y \
+    git-crypt git ssh unzip ca-certificates bzip2 curl \
   # install AWS CLI \
   && cd /tmp \
   && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
   && unzip awscliv2.zip \
   && ./aws/install \
-
   # cleanup
   && apt-get autoremove -y \
   && apt-get autoclean -y \
