@@ -1,6 +1,7 @@
 FROM cypress/browsers:node-20.14.0-chrome-125.0.6422.141-1-ff-126.0.1-edge-125.0.2535.85-1
 
-RUN apt-get update -y \
+RUN rm -f /etc/apt/sources.list.d/google-chrome.list \
+  && apt-get update -y \
   && apt-get install -y curl gnupg \
   && curl -fsSL https://dl.google.com/linux/linux_signing_key.pub \
     | gpg --dearmor -o /etc/apt/keyrings/google-chrome.gpg \
