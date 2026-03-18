@@ -5,7 +5,9 @@ ARG BALENA_VERSION=22.5.5
 RUN cd /tmp \
   && wget "https://github.com/balena-io/balena-cli/releases/download/v${BALENA_VERSION}/balena-cli-v${BALENA_VERSION}-linux-x64-standalone.tar.gz" -O balena-cli.tar.gz \
   && ls -al \
-  && tar -xzf balena-cli.tar.gz \
+  && mkdir balena-cli \
+  && (cd balena-cli && tar -xzf ../balena-cli.tar.gz) \
+  && ls -al \
   && sudo mkdir -p /usr/local/lib \
   && sudo mv balena-cli /usr/local/lib/ \
   # cleanup

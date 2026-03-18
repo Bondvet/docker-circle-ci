@@ -1,6 +1,7 @@
 FROM cypress/browsers:node-20.14.0-chrome-126.0.6478.114-1-ff-127.0.1-edge-126.0.2592.61-1
 
 RUN apt-get update -y \
+  && wget -qO- https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
   && apt-get install -y \
   git-crypt git ssh unzip ca-certificates bzip2 curl \
   # install AWS CLI \
