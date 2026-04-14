@@ -1,4 +1,4 @@
-FROM bondvet/circle-ci:v22.2.2
+FROM bondvet/circle-ci:v22.22.2
 
 ARG BALENA_VERSION=22.5.5
 
