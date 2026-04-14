@@ -1,1 +1,1 @@
-FROM bondvet/circle-ci:20.19.0
+FROM bondvet/circle-ci:v22.2.2
